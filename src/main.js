@@ -5,8 +5,6 @@
 let firstName = 'Scorpion'
 console.log(firstName)
 
-lastName = 'Blade'
-
 //TypeOf 8 type primitive
 console.log(typeof firstName) //1 string
 
@@ -89,3 +87,95 @@ console.log(!!'asd') // true
 console.log('' + 5) // 5 - string
 console.log(+'10') // 10 - number
 console.log(!!'someString') // true
+console.log(true + true) // 2
+
+//Operation
+let incrementA = 1
+let incrementB = 1
+
+const c = ++incrementA
+const d = incrementB++
+console.log(incrementA) // 1 + 1 = 2
+console.log(incrementB) // 1 + 1 = 2
+
+console.log(c) // 2
+console.log(d) // 1
+
+let a = 10
+let b = 1
+// b = b + a
+b += a
+console.log(b) // 11
+b -= a
+console.log(b) // 1
+b *= a
+console.log(b) // 10
+b /= a
+console.log(b) // 1
+// b = b % a
+b %= a // остаток от деления
+console.log(b) // 1
+
+// DRY(Don't Repeat Yourself) - не повторяйся
+const name = 'Scorpion'
+const lastName = 'Blade'
+function getMessage(name, lastname) {
+    console.log(name + ' '+ lastname +'- Fight...')
+}
+getMessage('Sonya') // Sonya undefined- Fight...
+getMessage(name, lastName) // Scorpion Blade- Fight...
+
+function createFullName(name, lastname, secondname) {
+    const result = name + ' ' + secondname +' ' + lastname
+return result
+}
+
+const fullName = createFullName('Zar', 'Zakharov', 'Konstantinovich')
+console.log(fullName) // Zar Konstantinovich Zakharov
+
+//Object
+const player1 = {
+    name: 'Scorpion',
+    hp: 100,
+    nameName: true,
+    name_name: true,
+    100: true,
+    $: true,
+    _: true,
+    // 1name: false,
+    // name.name: false,
+    '1name может быть чем угодно?': true,
+    attack: function () {
+        console.log('Fight...')
+    }
+}
+player1.attack()
+
+console.log(player1) // {...}
+console.log(player1.name) // '1name может быть чем угодно?'
+console.log(player1['hp']) // 100
+console.log(player1['1name может быть чем угодно?']) // true
+
+const count1 = 100
+console.log(player1[count1]) // true
+
+player1.weapon = 'Кинжал'
+console.log(player1)
+
+player1.hp = player1.hp - 20
+console.log(player1)
+
+delete player1.$
+delete player1._
+delete player1.name_name
+delete player1.nameName
+delete player1['1name может быть чем угодно?']
+delete player1['100']
+
+console.log(player1)
+
+// Array
+const message = ['Hello', true, 2021]
+console.log(message)
+
+console.log(message[0]) // Hello
