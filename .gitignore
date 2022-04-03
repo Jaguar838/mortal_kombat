@@ -4,3 +4,4 @@
 .idea/mortal_kombat.iml
 *.xml
 src/assets/.DS_Store
+node_modules/
