@@ -179,3 +179,43 @@ const message = ['Hello', true, 2021]
 console.log(message)
 
 console.log(message[0]) // Hello
+console.log(message[100]) // undefined
+
+message.push('World')
+console.log(message); // [ 'Hello', true, 2021, 'World' ]
+const str = message[0] + ' '+ message[3]
+console.log(str) // Hello World
+
+//Dom
+// const document = {
+//     children: [
+//         //html
+//         {
+//             children: [
+//                 //head
+//                 {
+//                   children: []
+//                 },
+//                 //body
+//                 {
+//                     children: []
+//                 }
+//             ]
+//         }
+//     ]
+// }
+// console.dir(document)
+
+const $player1 = document.createElement('div')
+$player1.classList.add('plaer1')
+
+const  $p = document.createElement('p')
+$p.innerText = 'Scorpion'
+$player1.appendChild($p)
+
+const $img=document.createElement('img')
+$img.src = 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif'
+$player1.appendChild($img)
+
+const $root = document.querySelector('.arenas')
+$root.appendChild($player1)
