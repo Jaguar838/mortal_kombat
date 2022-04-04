@@ -17,15 +17,16 @@ const player2 = {
     console.log(this.name + ' Fight...');
   },
 };
-<div class='player1'>
-    <div class='progressbar'>
-        <div class='life'></div>
-        <div class='name'>SCORPION</div>
-    </div>
-    <div class='character'>
-        <img src='http://reactmarathon-api.herokuapp.com/assets/scorpion.gif' />
-    </div>
-</div>
+
+// <div class='player1'>
+//     <div class='progressbar'>
+//         <div class='life'></div>
+//         <div class='name'>SCORPION</div>
+//     </div>
+//     <div class='character'>
+//         <img src='http://reactmarathon-api.herokuapp.com/assets/scorpion.gif' />
+//     </div>
+// </div>
 
 createPlayer() {
 
