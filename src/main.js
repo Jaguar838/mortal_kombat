@@ -206,16 +206,90 @@ console.log(str) // Hello World
 // }
 // console.dir(document)
 
-const $player1 = document.createElement('div')
-$player1.classList.add('plaer1')
+// const $player1 = document.createElement('div')
+// $player1.classList.add('player1')
+//
+// const  $p = document.createElement('p')
+// $p.innerText = 'Scorpion'
+// $player1.appendChild($p)
+//
+// const $img=document.createElement('img')
+// $img.src = 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif'
+// $player1.appendChild($img)
+//
+// const $root = document.querySelector('.arenas')
+// $root.appendChild($player1)
 
-const  $p = document.createElement('p')
-$p.innerText = 'Scorpion'
-$player1.appendChild($p)
+//Операторы сравнения
+const a1 =10
+const b1 = 5
+console.log(a1 > b1) // true
+console.log(a1 < b1) // false
+console.log(a1 >= b1) // true
+console.log(a1 <= b1) // false
 
-const $img=document.createElement('img')
-$img.src = 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif'
-$player1.appendChild($img)
+console.log(a1 != b1) // true
 
-const $root = document.querySelector('.arenas')
-$root.appendChild($player1)
+// Nestrogoe sravnenie s privideniem tipov
+console.log(a1 == b1) // false
+console.log(false == 0) // true
+
+
+console.log(false === 0) // false
+console.log('F' > '0') // true
+
+console.log(null > 0) // false
+console.log(null == 0) // false
+console.log(null >= 0) // true
+console.log(undefined == null) // true
+console.log(undefined === null) // false
+
+//Условные конструкции и операторы
+// const walkDirection = prompt('Where are we going?')
+//
+// if (walkDirection === 'left') {
+//     console.log('We should go on the ' + walkDirection)
+// } else if (walkDirection === 'right') {
+//     console.log('We should go on the ' + walkDirection)
+// }    else {
+//         console.log('We should stray!')
+//     }
+
+//Логические операторы
+//и или не
+
+console.log('%c&&', 'color: #FFFF00; background-color: #5394EC; padding: 0')
+console.log('%c&&', 'color: #FFFF00; background-color: #5394EC; padding: 2px')
+
+console.log(true && false) // false
+console.log(true && true) // true
+
+console.log(true && 'This string') // This string
+console.log(true && 'This string' && true) // true
+console.log(true && null && true) // null
+
+console.log('%c||', 'color: #FFFF00; background-color: #5394EC; padding: 2px')
+
+console.log(false || true) // true
+console.log(false || false) // false
+
+console.log('%c!', 'color: #FFFF00; background-color: #5394EC; padding: 2px')
+
+console.log(!true) // false
+console.log(!false) // true
+
+console.log(!'string') // false
+console.log(!1) // false
+
+console.log(!'') // true
+
+// Тернарный оператор
+console.log(true ? 1:2) // 1
+console.log(false ? 1:2) // 2
+
+const isTrue = true ? 'yes':'no';
+console.log(isTrue) // yes
+
+//Метод Math
+console.log(Math.floor(Math.random() * 100)) // целое в меньшую сторону
+console.log(Math.ceil(Math.random() * 100)) // целое в большую сторону
