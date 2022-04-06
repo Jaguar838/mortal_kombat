@@ -1,3 +1,7 @@
+//*********************************
+//Lesson 1 Переменные и типы данных
+//*********************************
+
 // let firstName
 // firstName='Scorpion'
 // console.log(firstName)
@@ -88,6 +92,10 @@ console.log('' + 5) // 5 - string
 console.log(+'10') // 10 - number
 console.log(!!'someString') // true
 console.log(true + true) // 2
+
+//*************************************
+//Lesson 2 DOM, функции массивы объекты
+//*************************************
 
 //Operation
 let incrementA = 1
@@ -220,6 +228,11 @@ console.log(str) // Hello World
 // const $root = document.querySelector('.arenas')
 // $root.appendChild($player1)
 
+//**********************************************
+//Lesson 3 Операторы сравнения, условные 
+// конструкции и операторы, логические операторы
+//**********************************************
+
 //Операторы сравнения
 const a1 =10
 const b1 = 5
@@ -293,3 +306,9 @@ console.log(isTrue) // yes
 //Метод Math
 console.log(Math.floor(Math.random() * 100)) // целое в меньшую сторону
 console.log(Math.ceil(Math.random() * 100)) // целое в большую сторону
+
+//*************************************
+//Lesson 4 Context, window && IIFE, 
+// this, call, apply && bind, 
+// цепочки областей видимости
+//*************************************
