@@ -1,3 +1,4 @@
+
 const $arenas = document.querySelector('.arenas')
 
 const player1 = {
@@ -64,3 +65,4 @@ player2.attack();
 //         <img src='http://reactmarathon-api.herokuapp.com/assets/scorpion.gif' />
 //     </div>
 // </div>
+
