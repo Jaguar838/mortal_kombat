@@ -7,9 +7,10 @@ const player1 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: 'Кинжал',
-    attack: function () {
-        console.log(this.name + ' Fight...');
-    },
+    changeHP: changeHP,
+    elHP: elHP,
+    renderHP: renderHP,
+    attack: attack
 };
 
 const player2 = {
@@ -18,9 +19,10 @@ const player2 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/kitana.gif',
     weapon: 'Кинжал',
-    attack: function () {
-        console.log(this.name + ' Fight...');
-    },
+    changeHP: changeHP,
+    elHP: elHP,
+    renderHP: renderHP,
+    attack: attack
 };
 
 $arenas.appendChild(createPlayer(player1));
@@ -28,11 +30,17 @@ $arenas.appendChild(createPlayer(player2));
 
 $randomButton.addEventListener('click', function () {
     console.log('###: Click Random Button')
-    changeHP(player1)
-    changeHP(player2)
+
+    player1.changeHP(getRandom(20))
+    player2.changeHP(getRandom(20))
+
+    player1.renderHP()
+    player2.renderHP()
 
     if (player1.hp === 0 || player2.hp === 0) {
         $randomButton.disabled = true
+        $arenas.appendChild(createReloadButton())
+
     }
 
     if (player1.hp === 0 && player1.hp < player2.hp) {
@@ -47,27 +55,34 @@ $randomButton.addEventListener('click', function () {
 player1.attack();
 player2.attack();
 
+function attack() {
+    console.log(this.name + ' Fight...');
+}
 
-function changeHP(objPlayer) {
-    const $playerLife = document.querySelector('.player' + objPlayer.id + ' .life')
-    objPlayer.hp -= getRandom(20)
-
-    if (objPlayer.hp <= 0) {
-        objPlayer.hp = 0
+function changeHP(damage) {
+    this.hp -= damage
+    if (this.hp <= 0) {
+        this.hp = 0
     }
-    console.log('###: ', objPlayer.hp)
-    $playerLife.style.width = objPlayer.hp + '%'
+}
+
+function elHP() {
+    return document.querySelector('.player' + this.id + ' .life')
+}
+
+function renderHP() {
+    this.elHP().style.width = this.hp + '%'
 }
 
 function playerWins(name) {
-    const $loseTitle = createEl('div', 'loseTitle')
+    const $winsTitle = createEl('div', 'winsTitle')
     if (name) {
-        $loseTitle.innerText = name + ' wins'
+        $winsTitle.innerText = name + ' wins'
     } else {
-        $loseTitle.innerText = 'draw'
+        $winsTitle.innerText = 'draw'
     }
 
-    return $loseTitle
+    return $winsTitle
 }
 
 function createPlayer(objPlayer) {
@@ -91,6 +106,17 @@ function createPlayer(objPlayer) {
     $character.appendChild($img)
 
     return $player
+}
+
+function createReloadButton() {
+    const $reloadWrap = createEl('div', 'reloadWrap')
+    const $reloadButton = createEl('button', 'button')
+    $reloadButton.innerText = 'Restart'
+    $reloadWrap.appendChild($reloadButton)
+    $reloadButton.addEventListener('click', function () {
+        window.location.reload()
+    })
+    return $reloadWrap
 }
 
 function createEl(tag, className) {
