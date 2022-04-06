@@ -2,6 +2,7 @@
 const $arenas = document.querySelector('.arenas')
 
 const player1 = {
+  id: 1,
   name: 'Scorpion',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
@@ -12,6 +13,7 @@ const player1 = {
 };
 
 const player2 = {
+  id: 2,
   name: 'Kitana',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/kitana.gif',
@@ -21,48 +23,42 @@ const player2 = {
   },
 };
 
-function createPlayer(playerNumber, objPlayer) {
-  const $player = document.createElement('div') // create tag div
-  $player.classList.add(playerNumber) // add class player
+function createPlayer(objPlayer) {
+  const $player = createEl('div', 'player'+objPlayer.id) // create tag div and add class player
 
-  const  $progressbar = document.createElement('div')
-  $progressbar.classList.add('progressbar')
+  const  $progressbar = createEl('div','progressbar')
   $player.appendChild($progressbar)
 
-  const  $life = document.createElement('div')
-  $life.classList.add('life')
+  const  $life = createEl('div','life')
   $progressbar.appendChild($life)
 
-  const  $name = document.createElement('div')
-  $name.classList.add('name')
+  const  $name = createEl('div','name')
   $name.innerText = objPlayer.name
   $progressbar.appendChild($name)
 
-  const  $character = document.createElement('div')
-  $character.classList.add('character')
+  const  $character = createEl('div','character')
   $player.appendChild($character)
 
-  const $img = document.createElement('img')
+  const $img = createEl('img')
   $img.src = objPlayer.img
   $character.appendChild($img)
 
-  $arenas.appendChild($player)
+  return $player
 }
 
-createPlayer('player1', player1);
-createPlayer('player2', player2);
+$arenas.appendChild(createPlayer(player1));
+$arenas.appendChild(createPlayer(player2));
 
 player1.attack();
 player2.attack();
 
 
-// <div class='player1'>
-//     <div class='progressbar'>
-//         <div class='life'></div>
-//         <div class='name'>SCORPION</div>
-//     </div>
-//     <div class='character'>
-//         <img src='http://reactmarathon-api.herokuapp.com/assets/scorpion.gif' />
-//     </div>
-// </div>
+function createEl(tag, className) {
+  const $tag = document.createElement(tag)
+  if (className) {
+    $tag.classList.add(className)
+  }
+
+  return $tag
+}
 
