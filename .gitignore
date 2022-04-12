@@ -1,7 +1,8 @@
 
+node_modules/
+/Lesson/
 .idea/jsLibraryMappings.xml
 .idea/modules.xml
 .idea/mortal_kombat.iml
 *.xml
 src/assets/.DS_Store
-node_modules/
