@@ -2,6 +2,11 @@
 //Lesson 1 Переменные и типы данных
 //*********************************
 
+// Boolean — этот тип полезная штука в любом языке программирования;
+// Number - этот тип используется в JavaScript для числовых значений;
+// Undefined - применяют для сущностей, которые не имеют присвоенного значения;
+// String - этот тип используется для строковых данных.
+
 // let firstName
 // firstName='Scorpion'
 // console.log(firstName)
@@ -312,3 +317,141 @@ console.log(Math.ceil(Math.random() * 100)) // целое в большую ст
 // this, call, apply && bind, 
 // цепочки областей видимости
 //*************************************
+// console.log(window)
+// window.console.log('hi')
+console.log('hi-hi')
+var a2 = 5 // попадают в объект window, тем самым засоряя его
+// let, const видны только в своей области локальной видимости
+// функции, объявленные без ключевого слова тоже попадают в глобальный объект window
+function sayHi() {
+    console.log('Hi')
+}
+
+// IIFE функция запускаемая сразу после объявления
+(function () {
+    console.log('Hi')
+})()
+
+//this ключевое слово
+// function greet() {
+//     return 'Hi, my name is ' + this;
+// }
+//
+// console.log(greet()) //Hi, my name is [object global]
+// console.log(this)
+
+function greet(greet) {
+    return greet + ', my name is ' + this.name;
+}
+
+const player2 = {
+    name: 'Scorpion',
+    greet: greet,
+}
+
+const enemy = {
+    name: 'Sub-Zero',
+    greet: greet,
+}
+
+console.log(player2.greet('Hi')) //Hi, my name is Scorpion
+console.log(enemy.greet()) //Hello, my name is Sub-Zero
+
+//Принудительное привязывание контекста
+// call
+console.log(enemy.greet.call(player2, 'Hello')) //Hello,, my name is Scorpion
+// apply
+console.log(enemy.greet.call(player2, ['Hello'])) //Hello,, my name is Scorpion
+// bind
+
+// Область видимости переменной - это часть программы, где эта переменная определена
+// Переменные деляться на глобальные и локальные
+// Глобальные переменные - это переменные объявленные вне каких либо функций и без ключевых слов let, const
+// Цепочки областей видимости создают вложенные функции
+// ключевое слово var, переменные могут оказаться пустыми(undefined) до их объявления
+var i = 5
+
+function fn1() {
+    var i = 10
+    console.log(i)
+
+    function moreFunc() {
+        var i // интерпитатор сначала объявляет переменную без значения (undefined)
+        console.log(i)
+        i = 15
+        console.log(i)
+    }
+
+    moreFunc()
+    console.log(i)
+}
+
+// Хорошей практикой являеться объявление переменных в начале функции, что-бы смысл этой функции было легче понять при чтении кода
+fn1() // 10 undefined 15 10
+
+// ключевое слово let, не могут оказаться пустыми(undefined) до их объявления
+// let, const они имеют локальную область видимости в любых фигурных скобках, кроме литералов объектов
+let j = 5
+
+// function fn2() {
+//     let j = 10
+//     console.log(j)
+//     function moreFunc() {
+//        console.log(j) // before initialization
+//        let j = 15
+//         console.log(j)
+//     }
+//     moreFunc()
+//     console.log(j)
+// }
+//
+// fn2() // 10 before initialization
+
+{
+    let j = 10
+    console.log(j) //10
+}
+console.log(j) //5
+// var не используют из-за неоднозначности его поведения при всплытии, к-е может сыграть
+// с тобой злую шутку!
+
+//*************************************
+//Lesson 5 Циклы и работа с формы из JS
+//*************************************
+
+//  Циклы автоматизируют большинство наших задач
+for (let counter = 0; counter < 10; counter = counter + 1) {
+    console.log('Переменная counter:', counter)
+}
+
+let result = ''
+for (let i = 0; i < 10; i++) {
+    result += i + ' '
+}
+console.log(result) //0 1 2 3 4 5 6 7 8 9
+
+result = ''
+for (let i = 0; i < 10; i++) {
+    if (i === 9) {
+        break
+    }
+    if (i % 2 === 0) {
+        continue
+    }
+    result += i + ' '
+}
+console.log(result) //1 3 5 7
+
+function getOnlyOddNumbers(counter) {
+    let result = ''
+    for (let i = 0; i < counter; i++) {
+        if (i % 2 === 0) {
+            continue
+        }
+        result += i + ' '
+    }
+    return result
+}
+
+console.log(getOnlyOddNumbers(20)) //1 3 5 7 9 11 13 15 17 19
+

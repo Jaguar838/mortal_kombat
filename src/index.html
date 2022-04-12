@@ -9,12 +9,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="root">
-        <div class="arenas arena1"></div>
-        <div class="chat"></div>
-        <div class="wall-left"></div>
-        <div class="wall-right"></div>
-    </div>
-    <script src="main.js"></script>
+<div class="root">
+    <div class="arenas arena1"></div>
+    <div class="chat"></div>
+    <div class="wall-left"></div>
+    <div class="wall-right"></div>
+</div>
+<form action="" class="form">
+    <label for="name">
+        <input type="text" id="name" placeholder="Name" name="name"></label>
+    <label for="male">
+        <input type="radio" id="male" name="sex" value="male">M</label>
+    <label for="female">
+        <input type="radio" id="female" name="sex" value="female">Ж</label>
+    <label for="notion">
+        <textarea name="notion" id="notion" cols="30" rows="10"></textarea></label>
+    <button type="submit">Send</button>
+</form>
+<script src="form.js"></script>
 </body>
 </html>
+
+<!--<form action="/api/subscribe" method="post">-->
+<!--    <ul>-->
+<!--        <li>-->
+<!--            <label>Name:</label>-->
+<!--            <input id="name" name="user_name" type="text">-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <label>Email:</label>-->
+<!--            <input id="mail" name="user_mail" type="email">-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <label>Message:</label>-->
+<!--            <textarea id="msg" name="user_message"></textarea>-->
+<!--        </li>-->
+<!--    </ul>-->
+
+<!--<button type="button">SEND</button>-->
+<!--</form>-->
