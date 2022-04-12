@@ -7,10 +7,10 @@ const player1 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: 'Кинжал',
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP,
-    attack: attack
+    changeHP,
+    elHP,
+    renderHP,
+    attack
 };
 
 const player2 = {
@@ -19,10 +19,10 @@ const player2 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/kitana.gif',
     weapon: 'Кинжал',
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP,
-    attack: attack
+    changeHP,
+    elHP,
+    renderHP,
+    attack
 };
 
 $arenas.appendChild(createPlayer(player1));
