@@ -1,3 +1,4 @@
+let colorBarLife = ''
 const ATTACK = ['head', 'body', 'foot'];
 
 const HIT = {
@@ -5,7 +6,7 @@ const HIT = {
     body: 25,
     foot: 20,
 }
-
+const $winsTitle = createEl('div', 'winsTitle')
 const $arenas = document.querySelector('.arenas')
 const $buttonFight = document.querySelector('.button')
 const $formFight = document.querySelector('.control')
@@ -57,6 +58,29 @@ function elHP() {
  */
 function renderHP() {
     this.elHP().style.width = this.hp + '%'
+    this.elHP().style.background = getLifeBarColor(this.hp);
+}
+
+/**
+ * Ф-я изменяет цвет индикатора div.life игрока
+ * @param {number} hp
+ * @returns {string} colorBarLife
+ */
+function getLifeBarColor(hp) {
+    switch (!!hp) {
+        case hp >= 75:
+            colorBarLife = 'MediumSeaGreen'
+            break
+        case hp >= 50 && hp <= 74:
+            colorBarLife = '#6bf904'
+            break
+        case hp >= 25 && hp <= 49:
+            colorBarLife = 'orange'
+            break
+        default:
+            colorBarLife = 'tomato'
+    }
+    return colorBarLife
 }
 
 /**
@@ -69,7 +93,6 @@ function createComment(className, text) {
     className.style.fontSize = '20px'
     className.innerText = text
     return className
-
 }
 
 /**
@@ -78,7 +101,7 @@ function createComment(className, text) {
  * @returns {HTMLElement}
  */
 function playerWins(name) {
-    const $winsTitle = createEl('div', 'winsTitle')
+
     if (name) {
         $winsTitle.innerText = name + ' wins'
     } else {
@@ -259,6 +282,7 @@ $formFight.addEventListener('submit', function (e) {
         $arenas.appendChild(playerWins(player1.name))
     } else if (player1.hp === 0 && player2.hp === 0) {
         $arenas.appendChild(playerWins())
+    } else {
+        $arenas.appendChild(createComment($winsTitle, `${player1.name} ${player1.hp}% | ${player2.name} ${player2.hp}%`))
     }
-
 })
