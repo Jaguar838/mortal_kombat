@@ -1,4 +1,4 @@
-let colorBarLife = ''
+
 const ATTACK = ['head', 'body', 'foot'];
 
 const HIT = {
@@ -109,18 +109,14 @@ function renderHP() {
 function getLifeBarColor(hp) {
     switch (!!hp) {
         case hp >= 75:
-            colorBarLife = 'MediumSeaGreen'
-            break
+            return 'MediumSeaGreen'
         case hp >= 50 && hp <= 74:
-            colorBarLife = '#6bf904'
-            break
+            return '#6bf904'
         case hp >= 25 && hp <= 49:
-            colorBarLife = 'orange'
-            break
+            return 'orange'
         default:
-            colorBarLife = 'tomato'
+            return 'tomato'
     }
-    return colorBarLife
 }
 
 /**
