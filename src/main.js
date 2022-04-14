@@ -166,7 +166,7 @@ player1.attack()
 
 console.log(player1) // {...}
 console.log(player1.name) // '1name может быть чем угодно?'
-console.log(player1['hp']) // 100
+console.log(player1['hp1']) // 100
 console.log(player1['1name может быть чем угодно?']) // true
 
 const count1 = 100
@@ -175,7 +175,7 @@ console.log(player1[count1]) // true
 player1.weapon = 'Кинжал'
 console.log(player1)
 
-player1.hp = player1.hp - 20
+player1.hp1 = player1.hp1 - 20
 console.log(player1)
 
 delete player1.$
@@ -455,3 +455,121 @@ function getOnlyOddNumbers(counter) {
 
 console.log(getOnlyOddNumbers(20)) //1 3 5 7 9 11 13 15 17 19
 
+//*********************************************
+//Lesson 6 Работа с датой, условные конструкции
+//*********************************************
+
+const direction = 'top'
+if (direction === 'top') {
+    console.log('Look at the top') //Look at the top
+} else if (direction === '') {
+    console.log('Look at the bottom')
+} else if (direction === 'left') {
+    console.log('Look at the left')
+} else if (direction === 'right') {
+    console.log('Look at the right')
+} else {
+    console.log('Look ahead')
+}
+
+function whereLook(direction) {
+    switch (direction) {
+        case 'top':
+            const name = 'Zar'
+            return name + ' Look at the top'
+        case 'bottom':
+            return 'Look at the bottom'
+        case 'left':
+            return 'Look at the left'
+        case 'right':
+            return 'Look at the right'
+        default:
+            return 'Look ahead'
+    }
+}
+
+console.log(whereLook('left')) //Look at the left
+console.log(whereLook('top')) //Look at the top
+console.log(whereLook('bottom')) //Look at the bottom
+console.log(whereLook())// Look ahead
+// Работа с датой
+const date = new Date()
+console.dir(date) //2022-04-14T09:18:50.161
+
+console.log(date.getDate()) // 14
+console.log(date.getMonth()) // 3
+
+console.log(date.getHours()) // 12
+console.log(date.getMinutes()) // 23
+
+console.log(new Date('1988-12-24')) //1988-12-24T00:00:00.000
+console.log(date.getHours()) // 12
+console.log(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()) //12:26:27
+
+//********************************************************
+//Lesson 7 Функции, модули,  деструктуризация
+//********************************************************
+//Деструктуризация позволяет распаковать массивы или объекты в кучу переменных
+
+// Деструктуризация полей объекта
+// const player3 = {
+//     names: 'Zar',
+//     type: 'sensei',
+//     weapon: ['JS', 'Layout HTML'],
+//     hp: {
+//     current: 1000,
+//         total: 800,
+//     }
+// }
+//
+// const {weapon, names, type} = player3
+//
+// console.log(names, type, weapon) // Zar undefined [ 'JS', 'Layout HTML' ]
+// const { hp: { current, total }, weapon, names, type= 'type isn\'t defined'} = player3
+// console.log(names, type, weapon) // Zar type isn't defined [ 'JS', 'Layout HTML' ]
+// console.log(hp) // {current: 1000, total: 800 }
+// 1000, 800 сам объект hp вывести уже не получиться,
+// он деструктуризирован, если нужен именно объек то его не нада деструктуризировать
+// console.log(current, total) // 1000, 800
+
+// Деструктуризация полей объекта, которые имеют одинаковые наименования
+// const player3 = {
+//     names: 'Zar',
+//
+//     weapon: ['JS', 'Layout HTML'],
+//     hp: {
+//         current: 1000,
+//         total: 800,
+//     }
+// }
+//
+// const player4 = {
+//     names: 'Zar',
+//
+//     weapon: ['JS', 'Layout HTML'],
+//     hp: {
+//         current: 1000,
+//         total: 800,
+//     }
+// }
+//
+// const {names, ...rest } = player3
+// const {names: namePlayer4, ...restPlayer4 } = player4
+//
+// console.log(names, rest) //Zar { weapon: [ 'JS', 'Layout HTML' ], hp: { current: 1000, total: 800 } }
+// console.log(namePlayer4, restPlayer4) //Zar { weapon: [ 'JS', 'Layout HTML' ], hp: { current: 1000, total: 800 } }
+
+// Деструктуризация массива
+const player3 = {
+    names: 'Zar',
+    type: 'sensei',
+    weapon: ['JS', 'Layout HTML', 'React'],
+    hp: {
+        current: 1000,
+        total: 800,
+    }
+}
+
+const {names, weapon: [one, two, three], ...rest} = player3
+
+console.log(names, one, three, rest) //Zar JS React { type: 'sensei', hp: { current: 1000, total: 800 } }
