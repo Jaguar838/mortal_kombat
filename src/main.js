@@ -573,3 +573,130 @@ const player3 = {
 const {names, weapon: [one, two, three], ...rest} = player3
 
 console.log(names, one, three, rest) //Zar JS React { type: 'sensei', hp: { current: 1000, total: 800 } }
+
+// Наследование от объекта прототипа
+const character = {
+    name: 'Scorpion',
+    hp: 100,
+    weapon: ['hands'],
+    type: 'fighters',
+}
+
+character.whoop = function () {
+    console.log(`${this.name} let's fight!`)
+}
+
+console.log(character.name) // Scorpion
+console.log(character.whoop()) // Scorpion let's fight!
+// console.log(character.kick()) // undefined error
+
+Object.prototype.kick = function () {
+    console.log('Kick me Again')
+}
+
+console.log(character.kick()) // Kick me Again
+
+const kitana = Object.create(character)
+console.log(kitana.name) // Scorpion
+kitana.name = 'Kitana';
+console.log(kitana.name) // Kitana
+console.log(kitana.kick()) // Kick me Again
+
+Object.prototype.toString = function () {
+    return 'Это объект!...'
+}
+console.log(character.toString()) // Это объект!...
+console.log(kitana.whoop()) // Kitana let's fight!
+const str1 = new String('This is string!')
+console.log(str1) // [String: 'This is string!']
+
+// Function Declaration при объявлении
+// поднимает функцию вверх лексического окружения
+// и она доступна в любом его месте
+// console.log(sum(2,4)) // 6
+// function sum(a,b) {
+//     return a + b
+// }
+//
+// console.log(sum(2,4)) // 6
+
+// Function Expression будет доступна только после её объявления
+//console.log(sum(2,4)) // ошибка
+// const sum =function (a=0,b=0) {
+//     return a + b
+// }
+//
+// console.log(sum(2,4)) // 6
+//
+// const  calc = sum;
+// console.log(calc(3,4)) //7
+// console.log(sum(3,4)) //7
+// console.log(sum()) //0
+
+//Anonymous Functions
+// function () {
+//     return 'String'
+// }
+// document.addEventListener('click', function () {
+//     return 'Some'
+// })
+
+// Self-Invoking Function || IIFE
+// const f = {
+//     name: 'Zar',
+// }
+// (function () {
+//     console.log(this)
+// })()
+//     (function(x){
+//         console.log(x);
+//     })("Hello, World!");
+// Arrow Function
+
+const sum = (a, b) => a + b
+console.log(sum(3, 4)) // 7
+function getRandom(n) {
+    return n ? Math.ceil(Math.random() * n) : 20
+}
+
+console.log(getRandom()) //20
+const random = (n) => Math.ceil(Math.random() * n)
+console.log(random(100)) //97
+
+// Стрелочная ф-я не имеет своего констекста
+const obj1 = {
+    name: 'Zar',
+    fn: function () {
+        console.log(this)
+    }
+}
+
+const obj2 = {
+    name: 'Zar Zakharov',
+    fn: () => {
+        console.log(this)
+    }
+}
+
+const obj3 = {
+    name: 'Zar Zakharov',
+    fn: function () {
+        const a1 = () => console.log(this)
+    }
+}
+
+obj1.fn() //{ name: 'Zar', fn: [Function: fn] }
+obj2.fn() //{window}
+obj3.fn() //{ name: 'Zar', fn: [Function: fn] }
+
+const copy1 = obj1.fn // { window }
+const copy2 = obj2.fn.bind(obj2) // { window }
+const copy3 = obj3.fn.bind(obj3) //{ name: 'Zar', fn: [Function: fn] }
+
+copy1() // { window }
+copy2() // { window }
+copy3() //{ name: 'Zar', fn: [Function: fn] }
+
+//************************************
+//Lesson 8 Класс и как с ним работать
+//************************************
