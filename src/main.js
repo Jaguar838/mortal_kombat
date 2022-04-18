@@ -1,10 +1,9 @@
 import {$arenas, $formFight, $buttonFight, createReloadButton} from "./js/refsDOM.js";
 import {player1, player2, createPlayer, playerAttack, enemyAttack, generateLogs, showResult} from "./js/players.js";
 
-// создаем игроков
-$arenas.appendChild(createPlayer(player1));
-$arenas.appendChild(createPlayer(player2));
-generateLogs('start', player1, player2);
+// инициализация игры
+init()
+
 // логика игры
 $formFight.addEventListener('submit', function (e) {
     e.preventDefault()
@@ -43,3 +42,10 @@ $formFight.addEventListener('submit', function (e) {
 // Результат игры
     showResult()
 })
+
+function init() {
+    // создаем игроков
+    $arenas.appendChild(createPlayer(player1));
+    $arenas.appendChild(createPlayer(player2));
+    generateLogs('start', player1, player2);
+}

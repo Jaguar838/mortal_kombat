@@ -5,7 +5,7 @@
  * @param {String or Array String} content
  * @returns {HTMLElement}
  */
-export function createEl(tag = 'div', className, content) {
+export const createEl = (tag = 'div', className, content) => {
     const $tag = document.createElement(tag)
     if (className) {
         $tag.classList.add(className)
@@ -24,7 +24,7 @@ export function createEl(tag = 'div', className, content) {
  * @param {number} [n]
  * @returns {number|number}
  */
-export function getRandom(n) {
+export const getRandom = (n) => {
     return n ? Math.ceil(Math.random() * n) : 20
 }
 
@@ -32,7 +32,7 @@ export function getRandom(n) {
  * Ф-я текущего времени
  * @returns {string} hh:mm:ss
  */
-export function getTime() {
+export const getTime = () => {
     const date = new Date();
     const hours = date.getHours();
     const minutes = date.getMinutes();
