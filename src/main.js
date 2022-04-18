@@ -1,7 +1,3 @@
-const $arenas = document.querySelector('.arenas')
-const $buttonFight = document.querySelector('.button')
-const $formFight = document.querySelector('.control')
-const $chat = document.querySelector('.chat')
 
 const ATTACK = ['head', 'body', 'foot'];
 
@@ -10,7 +6,7 @@ const HIT = {
     body: 25,
     foot: 20,
 }
-const LOGS = {
+const logs = {
     start: 'Часы показывали [time], когда [player1] и [player2] бросили вызов друг другу.',
     end: [
         'Результат удара [playerWins]: [playerLose] - труп',
@@ -50,49 +46,10 @@ const LOGS = {
     draw: 'Ничья - это тоже победа!'
 }
 
-/**
- * Ф-я генерирует лог чата игры
- * @param {string} type
- * @param player1
- * @param player2
- * @param {number} [damage]
- */
-function generateLogs(type, player1, player2, damage) {
-    const text = type.includes('start', 'draw')
-        ? LOGS[type]
-        : LOGS[type][getRandom(LOGS[type].length - 1)];
-    const formattedTime = getTime()
-    // console.log(formattedTime)
-    let message = ''
-    switch (type) {
-        case 'start':
-            message = text
-                .replace('[time]', formattedTime)
-                .replace('[player1]', player1.name)
-                .replace('[player2]', player2.name)
-            break
-        case 'end':
-            message = `${formattedTime} - ${text}`
-                .replace('[playerWins]', player1.name)
-                .replace('[playerLose]', player2.name)
-            break
-        case 'hit':
-            message = `${formattedTime} - ${text} -${damage} [${player2.hp}/100]`
-                .replace('[playerKick]', player1.name)
-                .replace('[playerDefence]', player2.name)
-            break
-        case 'defence':
-            message = `${formattedTime} - ${text} -${damage} [${player1.hp}/100]`
-                .replace('[playerDefence]', player1.name)
-                .replace('[playerKick]', player2.name)
-            break
-        case 'draw':
-            message = `${formattedTime} - ${text}`;
-            break;
-        //         [time] [text] [-player.hp] [hp/100]
-    }
-    $chat.insertAdjacentHTML('afterbegin', `<p>${message}<p>`);
-}
+const $winsTitle = createEl('div', 'winsTitle')
+const $arenas = document.querySelector('.arenas')
+const $buttonFight = document.querySelector('.button')
+const $formFight = document.querySelector('.control')
 
 
 const player1 = {
@@ -150,27 +107,32 @@ function renderHP() {
  * @returns {string} colorBarLife
  */
 function getLifeBarColor(hp) {
-    console.log('###: ', !hp)
     switch (!!hp) {
         case hp >= 75:
-            return 'green'
-        case hp >= 50 && hp <= 74:
             return 'MediumSeaGreen'
+        case hp >= 50 && hp <= 74:
+            return '#6bf904'
         case hp >= 25 && hp <= 49:
-            return 'tomato'
-        default:
             return 'orange'
+        default:
+            return 'tomato'
     }
 }
 
 /**
  * Возвращает победителя игры или ничья
  * @param {string} [name]
+ * @returns {HTMLElement}
  */
 function playerWins(name) {
-    const winnerName = name ? `${name} wins` : 'draw'
-    const $winsTitle = createEl('div', 'winsTitle', winnerName)
-    $arenas.appendChild($winsTitle)
+
+    if (name) {
+        $winsTitle.innerText = name + ' wins'
+    } else {
+        $winsTitle.innerText = 'draw'
+    }
+
+    return $winsTitle
 }
 
 /**
@@ -179,35 +141,40 @@ function playerWins(name) {
  * @returns {HTMLElement}
  */
 function createPlayer(objPlayer) {
+    const $player = createEl('div', 'player' + objPlayer.id) // create tag div and add class player
+
+    const $progressbar = createEl('div', 'progressbar')
+    $player.appendChild($progressbar)
+
     const $life = createEl('div', 'life')
-    const $name = createEl('div', 'name', objPlayer.name)
-    const $progressbar = createEl('div', 'progressbar', [$life, $name])
+    $progressbar.appendChild($life)
+
+    const $name = createEl('div', 'name')
+    $name.innerText = objPlayer.name
+    $progressbar.appendChild($name)
+
+    const $character = createEl('div', 'character')
+    $player.appendChild($character)
+
     const $img = createEl('img')
-
     $img.src = objPlayer.img
-    const $character = createEl('div', 'character', [$img])
+    $character.appendChild($img)
 
-    return createEl('div', 'player' + objPlayer.id, [$progressbar, $character])
+    return $player
 }
 
 /**
  * Ф-я создает элемент HTML
  * @param {String} tag
  * @param {String} className
- * @param {String or Array String} content
  * @returns {HTMLElement}
  */
-function createEl(tag = 'div', className, content) {
+function createEl(tag, className) {
     const $tag = document.createElement(tag)
     if (className) {
         $tag.classList.add(className)
     }
-    if (typeof content === 'string') {
-        $tag.innerText = content
-    }
-    if (Array.isArray(content)) {
-        content.forEach(item => $tag.appendChild(item))
-    }
+
     return $tag
 }
 
@@ -221,29 +188,18 @@ function getRandom(n) {
 }
 
 /**
- * Ф-я текущего времени
- * @returns {string} hh:mm:ss
+ * Ф-я создает кнопку перезагрузки
+ * @returns {HTMLElement}
  */
-function getTime() {
-    const date = new Date();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-    const generateTimeString = (time) => {
-        return time < 10 ? `0${time}` : time
-    }
-    return `${generateTimeString(hours)}:${generateTimeString(minutes)}:${generateTimeString(seconds)}`;
-}
-
-//Ф-я создает кнопку перезагрузки
 function createReloadButton() {
-    const $reloadButton = createEl('button', 'button', 'Restart')
-    const $reloadWrap = createEl('div', 'reloadWrap', [$reloadButton])
-
+    const $reloadWrap = createEl('div', 'reloadWrap')
+    const $reloadButton = createEl('button', 'button')
+    $reloadButton.innerText = 'Restart'
+    $reloadWrap.appendChild($reloadButton)
     $reloadButton.addEventListener('click', function () {
         window.location.reload()
     })
-    $arenas.appendChild($reloadWrap)
+    return $reloadWrap
 }
 
 /**
@@ -293,22 +249,19 @@ function enemyAttack() {
 //  определяем победителя
 function showResult() {
     if (player1.hp === 0 && player1.hp < player2.hp) {
-        playerWins(player2.name)
-        generateLogs('end', player2, player1)
+        $arenas.appendChild(playerWins(player2.name))
     } else if (player2.hp === 0 && player2.hp < player1.hp) {
-        playerWins(player1.name)
-        generateLogs('end', player1, player2)
+        $arenas.appendChild(playerWins(player1.name))
     } else if (player1.hp === 0 && player2.hp === 0) {
-        playerWins()
-        generateLogs('draw', player1, player2)
+        $arenas.appendChild(playerWins())
     }
 }
 
 // создаем игроков
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
-generateLogs('start', player1, player2);
-// логика игры
+
+//
 $formFight.addEventListener('submit', function (e) {
     e.preventDefault()
 
@@ -317,30 +270,21 @@ $formFight.addEventListener('submit', function (e) {
 
     console.log('###: p', player)
     console.log('###: e', enemy)
-    let damagePlayer1 = 0
-    let damagePlayer2 = 0
+
     if (player.hit !== enemy.defence) {
-        damagePlayer2 = player.value
         player2.changeHP(player.value)
         player2.renderHP()
-        generateLogs('hit', player1, player2, damagePlayer2)
-    } else {
-        generateLogs('defence', player1, player2, damagePlayer2)
     }
 
     if (enemy.hit !== player.defence) {
-        damagePlayer1 = enemy.value
         player1.changeHP(enemy.value)
         player1.renderHP()
-        generateLogs('hit', player2, player1, damagePlayer1)
-    } else {
-        generateLogs('defence', player2, player1, damagePlayer1)
     }
 
 // отключаем кнопку после game over
     if (player1.hp === 0 || player2.hp === 0) {
         $buttonFight.disabled = true
-        createReloadButton()
+        $arenas.appendChild(createReloadButton())
     }
 
 // Результат игры
