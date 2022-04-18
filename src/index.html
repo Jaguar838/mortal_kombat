@@ -27,6 +27,7 @@
     <button type="submit">Send</button>
 </form>
 <script src="main.js"></script>
+
 </body>
 </html>
 
@@ -48,3 +49,20 @@
 
 <!--<button type="button">SEND</button>-->
 <!--</form>-->
+<!--Внимательно посмотрите на код выше.-->
+<!--Что будет выведено в консоль при клике на кнопку?-->
+<!--<div onclick="greetingFunc(event);">-->
+<!--    <button onclick="clickFunc(event)">Click me!</button>-->
+<!--</div>-->
+<!--<script>-->
+<!--    function clickFunc(e) {-->
+<!--        e = e || window.event;-->
+<!--        e.stopPropagation();-->
+<!--        console.log('Clicked!')-->
+
+<!--    }-->
+<!--    function greetingFunc(e) {-->
+<!--        console.log('Hi there!')-->
+<!--    }-->
+<!--</script>-->
+<!--Верно, только эта строка будет выведена в консоль. Всё дело в прерывании всплытия события с помощью вызова e. stopPropagation()-->
